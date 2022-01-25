@@ -27,5 +27,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="D:/sp_dev/mariadb-java-client-2.7.3-sources.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

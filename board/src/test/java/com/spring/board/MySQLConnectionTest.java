@@ -7,11 +7,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MySQLConnectionTest {
 	
-	static final String Driver = "com.mysql.cj.jdbc.Driver";
-	static final String URL = "dbc:mysql://127.0.0.1/:3307/board?serverTimezone=Asia/Seoul&useSSL=false";
+	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+	static final String URL = "jdbc:mysql://127.0.0.1:3307/board?characterEncoding=UTF-8&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false";
     static final String USERNAME = "board";
     static final String PASSWORD = "41617385";
     
@@ -21,25 +25,28 @@ public class MySQLConnectionTest {
     	Connection conn = null;
     	Statement stmt = null;
     	try {
-    		System.out.println("=================== MySQL Connection START ===================");
-    		
-    		Class.forName(Driver);
-    		
-    		conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-    		stmt = conn.createStatement();
-    		
-    		String sql = "SELECT BOARD_SUBJECT, BOARD_CONTENT, BOARD_WRITER FROM TB_BOARD";
-    		
-    		ResultSet rs = stmt.executeQuery(sql);
-    		while (rs.next()) {
-    			
-    			String boardSubject = rs.getString("BOARD_SUBJECT");
-    			String boardContent = rs.getString("BOARD_CONTENT");
-    			String boardWriter = rs.getString("BOARD_WRITER");
-    			
-    			System.out.print("boardSubject : " + boardSubject + ", ");
-    			System.out.print("boardContent : " + boardContent + ", ");
-    			System.out.print("boardWriter : " + boardWriter);
+            
+            logger.info("==================== MySQL Connection START ====================");
+            
+            Class.forName(DRIVER);
+            
+            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            stmt = conn.createStatement();
+ 
+            String sql = "SELECT BOARD_SUBJECT, BOARD_CONTENT, BOARD_WRITER FROM TB_BOARD";
+ 
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                
+                String boardSubject = rs.getString("BOARD_SUBJECT");
+                String boardContent = rs.getString("BOARD_CONTENT");
+                String boardWriter = rs.getString("BOARD_WRITER");
+ 
+                logger.info("boardSubject : {}", boardSubject);
+                logger.info("boardContent: {}", boardContent);
+                logger.info("boardWriter: {}", boardWriter);
+                logger.info("========================================");
+                
     		}
     		
     		rs.close();
