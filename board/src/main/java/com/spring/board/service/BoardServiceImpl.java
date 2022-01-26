@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.board.dao.BoardDao;
 import com.spring.board.dto.BoardDto;
+import com.spring.board.dto.Criteria;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -21,10 +22,21 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	/**게시물 목록 조회 서비스 임플*/
+	/*
 	public List<BoardDto> list() throws Exception {
 		// dao에 있는list함수를 호출해서 반환
 		return dao.list();
+	} */
+	@Override
+	public List<BoardDto> list(Criteria cri) throws Exception{
+		
+		return dao.list(cri);
 	}
+	
+	public int listCount() throws Exception {
+		return dao.listCount();
+	}
+	
 	
 	/** 게시글 상세 조회 서비스 임플*/
 	public BoardDto read(int bno) throws Exception {

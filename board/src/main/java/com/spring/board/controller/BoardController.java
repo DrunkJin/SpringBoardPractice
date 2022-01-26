@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  
 import com.spring.board.dto.BoardDto;
 import com.spring.board.service.BoardService;
- 
+import com.spring.board.dto.Criteria;
+import com.spring.board.dto.PageMaker;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -46,6 +47,7 @@ public class BoardController {
 	}
 	
 	// 게시판 목록 조회
+	/*
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) throws Exception{
 		logger.info("list");
@@ -55,7 +57,21 @@ public class BoardController {
 		
 	return "board/list";
 			
-		}
+		} */
+	// 게시판 목록 페이지 테스트조회
+		@RequestMapping(value = "/list", method = RequestMethod.GET)
+		public String list(Model model, Criteria cri) throws Exception{
+			logger.info("list");
+			
+			model.addAttribute("list",service.list(cri));
+			PageMaker pageMaker = new PageMaker();
+			pageMaker.setCri(cri);
+			pageMaker.setTotalCount(service.listCount());
+			
+			model.addAttribute("pageMaker", pageMaker);
+			
+		return "board/list";
+			}
 	
 	// 게시글 조회
 	@RequestMapping(value="/readView", method = RequestMethod.GET)
@@ -92,5 +108,7 @@ public class BoardController {
 		model.addAttribute("delete", service.read(boarddto.getBno()));
 		return "board/deleteView";
 	}
+	
+	
 	
 }

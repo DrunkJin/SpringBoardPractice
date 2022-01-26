@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import com.spring.board.dto.BoardDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+import com.spring.board.dto.Criteria;
 
 @Repository
 public class BoardDaoImpl implements BoardDao {
@@ -22,8 +23,22 @@ public class BoardDaoImpl implements BoardDao {
 	
 	/** 게시물목록 조회 기능구현 */
 	@Override
+	public List<BoardDto> list(Criteria cri) throws Exception {
+		// To-Do Auto-generated method stub
+		return sqlSession.selectList("com.spring.board.boardMapper.listPage",cri);
+	}
+	/*
+	@Override
 	public List<BoardDto> list() throws Exception {
+		// To-Do Auto-generated method stub
 		return sqlSession.selectList("com.spring.board.boardMapper.list");
+	} */
+	
+	// 게시물 총 갯수
+	@Override
+	public int listCount() throws Exception {
+		// To-Do Auto-generated method stub
+		return sqlSession.selectOne("com.spring.board.boardMapper.listCount");
 	}
 	
 	/**  게시글 상세 조회 기능 구현 */

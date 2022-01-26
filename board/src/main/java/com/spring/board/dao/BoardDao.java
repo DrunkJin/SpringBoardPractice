@@ -2,6 +2,7 @@ package com.spring.board.dao;
  
 import java.util.List;
 import com.spring.board.dto.BoardDto;
+import com.spring.board.dto.Criteria;
 
 public interface BoardDao {
 	 
@@ -9,7 +10,13 @@ public interface BoardDao {
     public void write(BoardDto boarddto) throws Exception;
     
     /** 게시물목록조회 boardMapper랑 연결 */
+    public List<BoardDto> list(Criteria cri) throws Exception;
+    
+    /*
     public List<BoardDto> list() throws Exception;
+    */
+    //게시물 총 갯수
+    public int listCount() throws Exception;
     
     /** 게시글 상세 조회 */
     public BoardDto read(int bno) throws Exception;

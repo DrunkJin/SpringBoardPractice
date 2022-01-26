@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.board.dao.BoardDao;
 import com.spring.board.dto.BoardDto;
+import com.spring.board.dto.Criteria;
 import com.spring.board.form.BoardForm;
  
 public interface BoardService {
@@ -17,7 +18,12 @@ public interface BoardService {
 	public void write(BoardDto boardDto) throws Exception;
 	
 	// 게시물 목록 조회
+	/*
 	public List<BoardDto> list() throws Exception;
+	*/
+	public List<BoardDto> list(Criteria cri) throws Exception;
+	
+	public int listCount() throws Exception;
 	
 	// 게시글 상세 조회
 	public BoardDto read(int bno) throws Exception;
