@@ -12,7 +12,7 @@
     
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://127.0.0.1:3307/board?characterEncoding=UTF-8&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true&amp;useSSL=false"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3307/board?allowPublicKeyRetrieval=true&amp;useSSL=false&amp;serverTimezone=UTC"/>
         <property name="username" value="board" />
         <property name="password" value="41617385" />
     </bean>
@@ -26,6 +26,11 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
 	</bean>
+	
+	  <!-- scan -->
+    <context:component-scan base-package="com.spring.board.service"></context:component-scan>
+    <context:component-scan base-package="com.spring.board.dao"></context:component-scan>
+    <context:component-scan base-package="com.spring.board.dto"></context:component-scan>
 </beans>
 
 

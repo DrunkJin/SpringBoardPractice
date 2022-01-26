@@ -14,9 +14,9 @@ public class BoardForm {
     int board_hits;
     String del_yn;
     String ins_user_id;
-    String ins_date;
+    Date ins_date;
     String upd_user_id;
-    String upd_date;
+    Date upd_date;
     String search_type;
  
     public int getBoard_seq() {
@@ -27,15 +27,7 @@ public class BoardForm {
         this.board_seq = board_seq;
     }
  
-    public String getSearch_type() {
-		return search_type;
-	}
-
-	public void setSearch_type(String search_type) {
-		this.search_type = search_type;
-	}
-
-	public int getBoard_re_ref() {
+    public int getBoard_re_ref() {
         return board_re_ref;
     }
  
@@ -107,7 +99,13 @@ public class BoardForm {
         this.ins_user_id = ins_user_id;
     }
  
-  
+    public Date getIns_date() {
+        return ins_date;
+    }
+ 
+    public void setIns_date(Date ins_date) {
+        this.ins_date = ins_date;
+    }
  
     public String getUpd_user_id() {
         return upd_user_id;
@@ -116,23 +114,21 @@ public class BoardForm {
     public void setUpd_user_id(String upd_user_id) {
         this.upd_user_id = upd_user_id;
     }
-
-	public String getIns_date() {
-		return ins_date;
-	}
-
-	public void setIns_date(String ins_date) {
-		this.ins_date = ins_date;
-	}
-
-	public String getUpd_date() {
-		return upd_date;
-	}
-
-	public void setUpd_date(String upd_date) {
-		this.upd_date = upd_date;
-	}
  
-    
+    public Date getUpd_date() {
+        return upd_date;
+    }
+ 
+    public void setUpd_date(Date upd_date) {
+        this.upd_date = upd_date;
+    }
+ 
+    public String getSearch_type() {
+        return search_type;
+    }
+ 
+    public void setSearch_type(String search_type) {
+        this.search_type = search_type;
+    }
  
 }

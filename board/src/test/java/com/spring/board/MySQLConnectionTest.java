@@ -15,7 +15,7 @@ public class MySQLConnectionTest {
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-	static final String URL = "jdbc:mysql://127.0.0.1:3307/board?characterEncoding=UTF-8&serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false";
+	static final String URL = "jdbc:mysql://127.0.0.1:3307/board?allowPublicKeyRetrieval=true&amp;useSSL=false&amp;serverTimezone=UTC";
     static final String USERNAME = "board";
     static final String PASSWORD = "41617385";
     
@@ -33,14 +33,14 @@ public class MySQLConnectionTest {
             conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             stmt = conn.createStatement();
  
-            String sql = "SELECT BOARD_SUBJECT, BOARD_CONTENT, BOARD_WRITER FROM TB_BOARD";
+            String sql = "SELECT * FROM board.MP_BOARD";
  
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 
-                String boardSubject = rs.getString("BOARD_SUBJECT");
-                String boardContent = rs.getString("BOARD_CONTENT");
-                String boardWriter = rs.getString("BOARD_WRITER");
+                String boardSubject = rs.getString("TITLE");
+                String boardContent = rs.getString("CONTENT");
+                String boardWriter = rs.getString("WRITER");
  
                 logger.info("boardSubject : {}", boardSubject);
                 logger.info("boardContent: {}", boardContent);
