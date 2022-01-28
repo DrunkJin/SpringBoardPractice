@@ -4,12 +4,12 @@
   	
 <mapper namespace="com.spring.board.boardMapper">
 
-	<insert id="insert">
+	<insert id="insert" parameterType="com.spring.board.dto.BoardDto" useGeneratedKeys="true" keyProperty="bno">
 			
 			INSERT
 				INTO board.MP_BOARD
 					(
-						BNO,
+						
 						TITLE,
 						CONTENT,
 						WRITER,
@@ -17,7 +17,7 @@
 					)
 				VALUES
 					(
-						0,
+						
 						#{title},
 						#{content},
 						#{writer},
@@ -72,14 +72,16 @@
 	<update id="update" parameterType="com.spring.board.dto.BoardDto">
 		UPDATE BOARD.MP_BOARD
 			SET TITLE = #{title},
-				CONTENT = #{content}
+				CONTENT = #{content},
+				REGDATE = NOW()
 		WHERE BNO =#{bno}
 	</update>
 	
 	<select id="updatePage" parameterType="com.spring.board.dto.BoardDto">
 		UPDATE BOARD.MP_BOARD
 			SET TITLE = #{title},
-				CONTENT = #{content}
+				CONTENT = #{content},
+				REGDATE = NOW()
 		WHERE BNO =#{bno}
 	</select>
 	
@@ -87,6 +89,39 @@
 		DELETE FROM BOARD.MP_BOARD
 		WHERE BNO = #{bno}
 	</delete>
+	
+	<insert id="insertFile" parameterType="hashMap">
+		INSERT INTO board.MP_FILE(
+				FILE_NO,
+				BNO,
+				ORG_FILE_NAME,
+				STORED_FILE_NAME,
+				FILE_SIZE,
+				REGDATE
+			)VALUES(
+				0,
+				#{BNO},
+				#{ORG_FILE_NAME},
+				#{STORED_FILE_NAME},
+				#{FILE_SIZE},
+				NOW()
+			)
+	</insert>
+	
+	<!-- 첨부파일 조회 -->
+	<select id="selectFileList" parameterType="int" resultType="hashMap">
+		SELECT FILE_NO,
+			   ORG_FILE_NAME,
+			   ROUND(FILE_SIZE/1024,1) AS FILE_SIZE
+		  FROM board.MP_FILE
+		 WHERE BNO = #{BNO}
+		   AND DEL_GB = 'N'
+	</select>
+	
+	<!-- 첨부파일 다운 -->
+	<select id="selectFileInfo" parameterType="hashMap" resultType="hashMap">
+		SELECT STORED_FILE_NAME, ORG_FILE_NAME FROM board.MP_FILE WHERE FILE_NO = #{FILE_NO};
+	</select>
 	
 		
 <!-- 

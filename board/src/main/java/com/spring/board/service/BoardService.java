@@ -2,10 +2,13 @@ package com.spring.board.service;
 
 
 import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.spring.board.dao.BoardDao;
 import com.spring.board.dto.BoardDto;
@@ -15,7 +18,7 @@ import com.spring.board.form.BoardForm;
 public interface BoardService {
 	
 	// 게시물 작성
-	public void write(BoardDto boardDto) throws Exception;
+	public void write(BoardDto boardDto, MultipartHttpServletRequest mpRequest) throws Exception;
 	
 	// 게시물 목록 조회
 	/*
@@ -34,8 +37,11 @@ public interface BoardService {
 	/** 게시글 삭제 서비스 */
 	public void delete(int bno) throws Exception;
 	
+	// 첨부파일 조회
+	public List<Map<String, Object>> selectFileList(int bno) throws Exception;
 	
-	
+	// 첨부파일 다운로드
+	public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception;
 }
 	
 	

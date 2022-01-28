@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
    
 <!DOCTYPE html>
 <html>
@@ -22,9 +23,10 @@
 			<hr />
 			
 			<section id="container">
-				<form role="form" method="post" action="/board/write">
+				<form role="form" method="post" action="/board/write" enctype="multipart/form-data">
 					<table>
 						<tbody>
+				<c:if test="${member.userId != null}">
 							<tr>
 								<td>
 									<label for="title">제목</label><input type="text" id="title" name="title" />
@@ -37,13 +39,21 @@
 							</tr>
 							<tr>
 								<td>
-									<label for="writer">작성자</label><input type="text" id="writer" name="writer" />
+									<label for="writer">작성자</label><input type="text" id="writer" name="writer" value="${member.userId}" />
 								</td>
+							<tr>
+									<td>
+										<input type="file" name="file">
+									</td>
 							<tr>
 								<td>						
 									<button type="submit">작성</button>
 								</td>
-							</tr>			
+							</tr>
+				</c:if>
+				<c:if test="${member.userId == null}">
+					<p>로그인 후에 작성하실 수 있습니다.</p>
+				</c:if>			
 						</tbody>			
 					</table>
 				</form>

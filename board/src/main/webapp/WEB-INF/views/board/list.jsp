@@ -15,7 +15,7 @@
 		<header>
 			<h1>게시판</h1>	
 		</header>
-		<nav>홈</nav>
+		<a href = "/login.jsp">홈</a>
 		<hr />
 		
 		<section id="container">
@@ -57,6 +57,12 @@
 				<form>
 				<input type='button' value='글 작성' onclick="location='/board/writeView'"/>
 				</form>
+				<form>
+				<c:if test="${member == null}"><a href="/login.jsp">로그인</a></c:if>
+				<c:if test="${member != null}"><a href="/member/logout">로그아웃</a></c:if>
+				</form>
+				<form method="post"></form>
+				<form><input type='button' value='회원가입' onclick="location='/member/register'"/></form>
 			</section>
 			<hr />
 	</div>

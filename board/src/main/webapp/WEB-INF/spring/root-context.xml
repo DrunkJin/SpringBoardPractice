@@ -31,6 +31,7 @@
     <context:component-scan base-package="com.spring.board.service"></context:component-scan>
     <context:component-scan base-package="com.spring.board.dao"></context:component-scan>
     <context:component-scan base-package="com.spring.board.dto"></context:component-scan>
+    <context:component-scan base-package="com.spring.board.util"></context:component-scan>
 </beans>
 
 

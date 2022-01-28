@@ -1,13 +1,15 @@
 package com.spring.board.dao;
  
 import java.util.List;
+import java.util.Map;
+
 import com.spring.board.dto.BoardDto;
 import com.spring.board.dto.Criteria;
 
 public interface BoardDao {
 	 
 	/** 글작성 dao */
-    public void write(BoardDto boarddto) throws Exception;
+    public int write(BoardDto boarddto) throws Exception;
     
     /** 게시물목록조회 boardMapper랑 연결 */
     public List<BoardDto> list(Criteria cri) throws Exception;
@@ -29,6 +31,16 @@ public interface BoardDao {
     
     /** 게시글 수정페이지이동 다오 */
     public BoardDto update(int bno) throws Exception;
+    
+    /** 첨부파일 업로드 */
+    public void insertFile(Map<String, Object> map) throws Exception;
+    
+    // 첨부파일 조회
+ 	public List<Map<String, Object>> selectFileList(int bno) throws Exception;
+ 	
+ 	// 첨부파일 다운로드
+ 	public Map<String, Object> selectFileInfo(Map<String, Object> map) throws Exception;
+ 	
 }
     
     

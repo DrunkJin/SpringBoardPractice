@@ -21,7 +21,7 @@
 			<hr />
 			
 			<section id="container">
-				<form role="form" method="post">
+				<form role="form" method="post" action="/fileDown">
 					<table>
 						<tbody>
 							<tr>
@@ -41,23 +41,37 @@
 								<td>
 									<label for="writer">작성자</label><input type="text" id="writer" name="writer" value = "${read.writer}"/>
 								</td>
+								
 							<tr>
 								<td>
 									<label for = "regdate">작성날짜</label>						
 									<input value="${read.regdate}">
 								</td>
 							</tr>
+							<tr>
+								<td>
+								<c:forEach var="file" items="${file}">
+									<input type="hidden" id="file_no" value="${file.FILE_NO }">
+									<input type="button" value= "${file.ORG_FILE_NAME } 다운로드" onclick="location='/board/fileDown?FILE_NO=${file.FILE_NO}'">
+								</c:forEach>
 						</tbody>		
 					<form>
-						<input type='button' value='글 수정' onclick="location='/board/updateView?bno=${read.bno}'"/>
+						<input type='button' value='글 수정' onclick="location='/board/updateView?bno=${read.bno}'">
 					</form>	
+					<form>
+						<input type='button' value='글 목록' onclick="location='/board/list'">
+					</form>
 					</table>
 				</form>
-				<form>
-					<input type='button' value='목록보기' onclick="location='/board/list'"/>
+				
+					<!-- <c:forEach var="file" items="${file}">
+						<a href="#" onclick="fn_fileDown('${file.FILE_NO}'); return false;">${file.ORG_FILE_NAME}</a>(${file.FILE_SIZE}kb)<br>
+						<input value="${file.bno}">
+					</c:forEach>
+					<input type="submit" value="파일 다운로드">
 				</form>
-				<input type='button' value='삭제하기' onclick="location='/board/deleteView?bno=${read.bno}'"/>
-				</form>
+				<!--  <a href="/img/112.png" download>목록</a> -->
+				<input type='button' value='삭제하기' onclick="location='/board/deleteView?bno=${read.bno}'">
 			</section>
 			<hr />
 		</div>
